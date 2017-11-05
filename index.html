@@ -1,8 +1,71 @@
 <!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<title>dev - JavaScript</title>
 </head>
 <body>
-Witaj w aplikacji która nic nie robi, przygotuj się na niedostatek wrażeń i emocji, a także na niezwykłe doznania niczego.<br />
-I love do nothing!
+<div class="container">
+	Witaj podróżniku<br />
+	<div id="tutaj"></div>
+
+	<form name="clock" onSubmit="0">
+	  <input type="text" name="face" size="24">
+	</form>
+
+</div>
+
+<script type="text/javascript">
+	tablica = ["pierwszy", "drugi"];
+	tablica2 = ["jabłko", "gruszka"];
+
+	var wojownik = {name:"Wojownik", power:"20", defence:"20"};
+	var lucznik = {name:"Łucznik", power:"30", defence:"8"};
+	var tank = {name:"Człowiek z tarczą", power:"8", defence:"40"};
+
+	console.log("Twoja moc to: "+lucznik.power);
+	var tutaj = document.getElementById("tutaj");
+	tutaj.innerHTML = "Twoja moc to: "+lucznik.power;
+
+</script>
+
+<script language="javascript">
+var timerID = null;
+var timerRunning = false;
+function stopclock()
+{
+    if(timerRunning)
+        clearTimeout(timerID)
+    timerRunning = false;
+}
+
+function startclock()
+{
+    stopclock();
+    showtime();
+}
+
+function showtime()
+{
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    var timeValue = "" + ((hours > 12) ? hours - 12 : hours);
+    timeValue  += ((minutes < 10) ? ":0" : ":") + minutes;
+    timeValue  += ((seconds < 10) ? ":0" : ":") + seconds;
+    timeValue  += (hours >= 12) ? " P.M." : " A.M.";
+    document.clock.face.value = timeValue;
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+}
+</script>
+
+
+
+<script>startclock();</script>
+
 </body>
+</html>
