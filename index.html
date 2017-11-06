@@ -4,17 +4,12 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<title>Ddev - JavaScript</title>
+	<title>Spam w konsoli - app</title>
 </head>
 <body>
 <div class="container">
-	Witaj podróżniku<br />
+	Witaj podróżniku(jest też papieżak)<br />
 	<div id="tutaj"></div>
-
-	<form name="clock" onSubmit="0">
-	  <input type="text" name="face" size="24">
-	</form>
-
 </div>
 
 <script type="text/javascript">
@@ -29,43 +24,14 @@
 	var tutaj = document.getElementById("tutaj");
 	tutaj.innerHTML = "Twoja moc to: "+lucznik.power;
 
+	function alerty() {
+		console.log("puk! puk!")
+	}
+
+	setInterval(alerty, 3000);
+	//////////////////////////
+
+
 </script>
-
-<script language="javascript">
-var timerID = null;
-var timerRunning = false;
-function stopclock()
-{
-    if(timerRunning)
-        clearTimeout(timerID)
-    timerRunning = false;
-}
-
-function startclock()
-{
-    stopclock();
-    showtime();
-}
-
-function showtime()
-{
-    var now = new Date();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    var seconds = now.getSeconds();
-    var timeValue = "" + ((hours > 12) ? hours - 12 : hours);
-    timeValue  += ((minutes < 10) ? ":0" : ":") + minutes;
-    timeValue  += ((seconds < 10) ? ":0" : ":") + seconds;
-    timeValue  += (hours >= 12) ? " P.M." : " A.M.";
-    document.clock.face.value = timeValue;
-    timerID = setTimeout("showtime()",1000);
-    timerRunning = true;
-}
-</script>
-
-
-
-<script>startclock();</script>
-
 </body>
 </html>
