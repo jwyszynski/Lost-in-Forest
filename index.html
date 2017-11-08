@@ -9,11 +9,95 @@
 </head>
 <body>
 <div class="container">
-	<div id="tutaj"></div><br />
+	<div id="gra"></div>
+	<div class="demo"></div>
 </div>
+
+<script type="text/javascript"></script>
 
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var gra = (function() {
+	var _tutaj = document.getElementById("gra");
+	var _er = "Errorów Brak"
+
+	var _start = async function() {
+//STWÓRZ BOX
+		var box = document.createElement('div');
+		box.classList.add('center', 'gra-box');
+//POWITANIE
+		var powitanie = document.createElement('div');
+		powitanie.innerHTML = 'Witaj<br />Podaj swoje imie:';
+//INPUTY
+		var input_imie = document.createElement('input');
+		input_imie.type = 'text';
+		input_imie.id = 'imie';
+
+		var submit_imie = document.createElement('input');
+		submit_imie.type = 'submit';
+//DOŁĄCZ DO BOX
+		box.appendChild(powitanie);
+		box.appendChild(input_imie);
+		box.appendChild(submit_imie);
+		_tutaj.appendChild(box);
+
+		var remove_start = function() {
+			imie = document.getElementById("imie").value;
+			box.remove();
+			console.log('usuwam box');
+		}
+//OCZEKUJ NA KLIK SUBMIT
+		submit_imie.addEventListener("click", remove_start);
+		submit_imie.addEventListener("click", _wybor_postaci);
+
+			await sleep(10);
+
+		//_tutaj.innerHTML += _er;
+
+	}
+
+	var _wybor_postaci = function() {
+		console.log('Twoje imie to: '+imie);
+		console.log('przeszedłem do wyboru postaci');
+
+//STWÓRZ BOX
+		var box = document.createElement('div');
+		box.classList.add('center', 'gra-box');
+//POWITANIE
+		var imie_out = document.createElement('div');
+		imie_out.innerHTML = 'Twoje imie to: '+imie;
+
+		box.appendChild(imie_out);
+		_tutaj.appendChild(box);
+	}
+
+	var _print_er = function() {
+			console.log(_er);
+	}
+
+	//Poniżej wywoływanie metod i innych w świecie wyższym
+	return {
+			print_er : _print_er, // To jest funkcja, metoda
+			er : _er, //to jest zmienna, wartość
+			start : _start
+	}
+})();
+
+
+function start_app(){
+	gra.start();
+	gra.print_er();
+}
+
+//Wystaruj
+window.onload = start_app();
+
+
 	// tablica = ["pierwszy", "drugi"];
 	// tablica2 = ["jabłko", "gruszka"];
 	//
@@ -22,22 +106,21 @@
 	// var tank = {name:"Człowiek z tarczą", power:"8", defence:"40"};
 	//
 	// console.log("Twoja moc to: "+lucznik.power);
-	// var tutaj = document.getElementById("tutaj");
-	// tutaj.innerHTML = "Twoja moc to: "+lucznik.power;
+	// var gra = document.getElementById("gra");
+	// gra.innerHTML = "Twoja moc to: "+lucznik.power;
 	//
 	// function alerty() {
 	// 	console.log("puk! puk!");
 	// }
-	// var element = document.createElement('div'); //tworzymy nowego Diva
-	// element.id = 'bloczek';
-	// element.style.width = '400px';
-	// element.style.height = '200px';
-	// element.style.backgroundColor = '#FF6633';
-	var btn = document.createElement("DIV");        // Create a <button> element
-	var t = document.createTextNode("CLICK ME");       // Create a text node
-	btn.innerHTML="W3";                                // Append the text to <button>
-	document.getElementById("tutaj").appendChild(btn);                    // Append <button> to <body>
-
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+<!-- -->
