@@ -2,35 +2,41 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<title>Spam w konsoli - app</title>
+	<title>Mini gra</title>
 </head>
 <body>
 <div class="container">
-	Witaj podróżniku(jest też papieżak)<br />
-	<div id="tutaj"></div>
+	<div id="tutaj"></div><br />
 </div>
 
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
-	tablica = ["pierwszy", "drugi"];
-	tablica2 = ["jabłko", "gruszka"];
-
-	var wojownik = {name:"Wojownik", power:"20", defence:"20"};
-	var lucznik = {name:"Łucznik", power:"30", defence:"8"};
-	var tank = {name:"Człowiek z tarczą", power:"8", defence:"40"};
-
-	console.log("Twoja moc to: "+lucznik.power);
-	var tutaj = document.getElementById("tutaj");
-	tutaj.innerHTML = "Twoja moc to: "+lucznik.power;
-
-	function alerty() {
-		console.log("puk! puk!")
-	}
-
-	setInterval(alerty, 3000);
-	//////////////////////////
-
+	// tablica = ["pierwszy", "drugi"];
+	// tablica2 = ["jabłko", "gruszka"];
+	//
+	// var wojownik = {name:"Wojownik", power:"20", defence:"20"};
+	// var lucznik = {name:"Łucznik", power:"30", defence:"8"};
+	// var tank = {name:"Człowiek z tarczą", power:"8", defence:"40"};
+	//
+	// console.log("Twoja moc to: "+lucznik.power);
+	// var tutaj = document.getElementById("tutaj");
+	// tutaj.innerHTML = "Twoja moc to: "+lucznik.power;
+	//
+	// function alerty() {
+	// 	console.log("puk! puk!");
+	// }
+	// var element = document.createElement('div'); //tworzymy nowego Diva
+	// element.id = 'bloczek';
+	// element.style.width = '400px';
+	// element.style.height = '200px';
+	// element.style.backgroundColor = '#FF6633';
+	var btn = document.createElement("DIV");        // Create a <button> element
+	var t = document.createTextNode("CLICK ME");       // Create a text node
+	btn.innerHTML="W3";                                // Append the text to <button>
+	document.getElementById("tutaj").appendChild(btn);                    // Append <button> to <body>
 
 </script>
 </body>
