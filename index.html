@@ -8,9 +8,12 @@
 	<title>Mini gra</title>
 </head>
 <body>
+	<div class="developer"><a href="test.html">Test.html</a></div>
 <div class="container">
-	<div id="gra"></div>
-	<div class="demo"></div>
+	<div class="okno-gry">
+		<div id="gra"></div>
+		<div class="demo"></div>
+	</div>
 </div>
 
 <script type="text/javascript"></script>
@@ -21,18 +24,26 @@
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
+//imie
+var global_name, global_error;
 
+//////////////////////////////
+// GŁÓWNA FUNKCJA GRY
+//////////////////////////////
 var gra = (function() {
 	var _tutaj = document.getElementById("gra");
 	var _er = "Errorów Brak"
 
 	var _start = async function() {
+
 //STWÓRZ BOX
 		var box = document.createElement('div');
 		box.classList.add('center', 'gra-box');
+
 //POWITANIE
 		var powitanie = document.createElement('div');
 		powitanie.innerHTML = 'Witaj<br />Podaj swoje imie:';
+
 //INPUTY
 		var input_imie = document.createElement('input');
 		input_imie.type = 'text';
@@ -40,6 +51,7 @@ var gra = (function() {
 
 		var submit_imie = document.createElement('input');
 		submit_imie.type = 'submit';
+
 //DOŁĄCZ DO BOX
 		box.appendChild(powitanie);
 		box.appendChild(input_imie);
@@ -47,10 +59,11 @@ var gra = (function() {
 		_tutaj.appendChild(box);
 
 		var remove_start = function() {
-			imie = document.getElementById("imie").value;
+			global_name = document.getElementById("imie").value;
 			box.remove();
 			console.log('usuwam box');
 		}
+
 //OCZEKUJ NA KLIK SUBMIT
 		submit_imie.addEventListener("click", remove_start);
 		submit_imie.addEventListener("click", _wybor_postaci);
@@ -62,15 +75,20 @@ var gra = (function() {
 	}
 
 	var _wybor_postaci = function() {
-		console.log('Twoje imie to: '+imie);
+		console.log('Twoje imie to: '+global_name);
 		console.log('przeszedłem do wyboru postaci');
 
 //STWÓRZ BOX
 		var box = document.createElement('div');
 		box.classList.add('center', 'gra-box');
+
 //POWITANIE
 		var imie_out = document.createElement('div');
-		imie_out.innerHTML = 'Twoje imie to: '+imie;
+		imie_out.innerHTML = 'Twoje imie to: '+global_name;
+
+		var stats = element.stats();
+
+		box.appendChild(stats);
 
 		box.appendChild(imie_out);
 		_tutaj.appendChild(box);
@@ -80,13 +98,15 @@ var gra = (function() {
 			console.log(_er);
 	}
 
-	//Poniżej wywoływanie metod i innych w świecie wyższym
+//ZWRACANE METODY
 	return {
 			print_er : _print_er, // To jest funkcja, metoda
 			er : _er, //to jest zmienna, wartość
 			start : _start
 	}
 })();
+
+
 
 
 function start_app(){
