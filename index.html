@@ -1,146 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl_PL">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="main.css">
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<title>Mini gra</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jakaś gra</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato&amp;subset=latin-ext" rel="stylesheet">
+  <style media="screen">
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+    }
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      text-align: center;
+    }
+    a {
+      text-align: center;
+    }
+    .all {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-	<div class="developer"><a href="test.html">Test.html</a></div>
-<div class="container">
-	<div class="okno-gry">
-		<div id="gra"></div>
-		<div class="demo"></div>
-	</div>
-</div>
-
-<script type="text/javascript"></script>
-
-<script type="text/javascript" src="script.js"></script>
-<script type="text/javascript">
-
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-//imie
-var global_name, global_error;
-
-//////////////////////////////
-// GŁÓWNA FUNKCJA GRY
-//////////////////////////////
-var gra = (function() {
-	var _tutaj = document.getElementById("gra");
-	var _er = "Errorów Brak"
-
-	var _start = async function() {
-
-//STWÓRZ BOX
-		var box = document.createElement('div');
-		box.classList.add('center', 'gra-box');
-
-//POWITANIE
-		var powitanie = document.createElement('div');
-		powitanie.innerHTML = 'Witaj<br />Podaj swoje imie:';
-
-//INPUTY
-		var input_imie = document.createElement('input');
-		input_imie.type = 'text';
-		input_imie.id = 'imie';
-
-		var submit_imie = document.createElement('input');
-		submit_imie.type = 'submit';
-
-//DOŁĄCZ DO BOX
-		box.appendChild(powitanie);
-		box.appendChild(input_imie);
-		box.appendChild(submit_imie);
-		_tutaj.appendChild(box);
-
-		var remove_start = function() {
-			global_name = document.getElementById("imie").value;
-			box.remove();
-			console.log('usuwam box');
-		}
-
-//OCZEKUJ NA KLIK SUBMIT
-		submit_imie.addEventListener("click", remove_start);
-		submit_imie.addEventListener("click", _wybor_postaci);
-
-			await sleep(10);
-
-		//_tutaj.innerHTML += _er;
-
-	}
-
-	var _wybor_postaci = function() {
-		console.log('Twoje imie to: '+global_name);
-		console.log('przeszedłem do wyboru postaci');
-
-//STWÓRZ BOX
-		var box = document.createElement('div');
-		box.classList.add('center', 'gra-box');
-
-//POWITANIE
-		var imie_out = document.createElement('div');
-		imie_out.innerHTML = 'Twoje imie to: '+global_name;
-
-		var stats = element.stats();
-
-		box.appendChild(stats);
-
-		box.appendChild(imie_out);
-		_tutaj.appendChild(box);
-	}
-
-	var _print_er = function() {
-			console.log(_er);
-	}
-
-//ZWRACANE METODY
-	return {
-			print_er : _print_er, // To jest funkcja, metoda
-			er : _er, //to jest zmienna, wartość
-			start : _start
-	}
-})();
-
-
-
-
-function start_app(){
-	gra.start();
-	gra.print_er();
-}
-
-//Wystaruj
-window.onload = start_app();
-
-
-	// tablica = ["pierwszy", "drugi"];
-	// tablica2 = ["jabłko", "gruszka"];
-	//
-	// var wojownik = {name:"Wojownik", power:"20", defence:"20"};
-	// var lucznik = {name:"Łucznik", power:"30", defence:"8"};
-	// var tank = {name:"Człowiek z tarczą", power:"8", defence:"40"};
-	//
-	// console.log("Twoja moc to: "+lucznik.power);
-	// var gra = document.getElementById("gra");
-	// gra.innerHTML = "Twoja moc to: "+lucznik.power;
-	//
-	// function alerty() {
-	// 	console.log("puk! puk!");
-	// }
-</script>
+  <div class="all">
+    <h1>Witaj na stronie projektu <b style="font-size:38px;">Lost in Forest</b></h1><br />
+    <a href="text/game.html">game.html</a><br />
+    <a href="test.html">test.html</a>
+  </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!-- -->

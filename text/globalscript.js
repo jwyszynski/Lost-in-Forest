@@ -1,5 +1,7 @@
 //z funkci globalnej, podsawowej
-  var global_name, global_error;
+
+  var global_name, global_error, g_mn_stats;
+  g_mn_stats = 1.3; //Przelicznik statystyk co poziom, o tyle zwiększa się dana statystyka co 1 poziom
   global_name = 'Aleksander Wielki';
 
   var potwor1 = new potwor('dzik', 1);
@@ -25,7 +27,7 @@ var gracz = {
   exp : 100,
 
   print : function() {
-    console.log('Name: '+this.name+' Gold: '+this.gold+' Exp: '+this.exp+'\nTwoja postać: '+'rasa: '+this.postac.rasa+', poziom: '+this.postac.poziom+', siła: '+this.postac.sila+', obrona: '+this.postac.obrona+', hp: '+this.postac.hp);
+    console.log('Name: '+this.name+' Gold: '+this.gold+' Exp: '+this.exp+'\nTwoja postać: '+gracz.postac.print_text);
   },
 
   jaki_poziom : function() {
@@ -34,6 +36,7 @@ var gracz = {
     var ile_exp = 20*gracz.postac.poziom;
     if (gracz.exp>=ile_exp) {
       gracz.postac.levelup();
+      console.log('Levelup! Twój level: '+gracz.postac.poziom);
     }
   }
 
@@ -79,6 +82,7 @@ var walka = {
   },
 
   gracz_uderza_potwora : function(_potwor) {
+    // Dodać jakieś inne formy ataku
     if (_potwor.zywy===true) {
     var mnoznik_obrazen = this.mnoznik_obrazen(_potwor.obrona);
 
@@ -117,7 +121,7 @@ var walka = {
     if (gracz.postac.hp<=0) {
       this.przegrana();
     } else if (_potwor.hp<=0) {
-      this.wygrana();
+      this.wygrana(_potwor);
     }
   },
 
@@ -126,11 +130,13 @@ var walka = {
     //Zacznij od nowa albo coś...
   },
 
-  wygrana : function() {
-    console.log('Zabiłeś Potwora: '+potwor1.rasa+', Twoja nagroda -> gold: '+potwor1.gold+' exp: '+potwor1.exp);
-    gracz.gold += potwor1.gold;
-    gracz.exp += potwor1.exp;
-    potwor1.zywy = false;
+  wygrana : function(_potwor) {
+    console.log('Zabiłeś Potwora: '+_potwor.rasa+', Twoja nagroda -> gold: '+_potwor.gold+' exp: '+_potwor.exp);
+    gracz.gold += _potwor.gold;
+    gracz.exp += _potwor.exp;
+    gracz.postac.hp = gracz.postac.hp_max;
+    console.log('Zostałeś uleczony');
+    _potwor.zywy = false;
   }
 
 }

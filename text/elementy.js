@@ -52,29 +52,35 @@ var element = {
 
     this.levelup = function() {
       this.poziom++;
-      this.sila =sila*(1+(this.poziom-1)/4);
-      this.obrona =obrona*(1+(this.poziom-1)/4);
-      this.hp =hp*(1+(this.poziom-1)/4);
+      var wzmoc = Math.pow(g_mn_stats, this.poziom-1);
+      this.sila = Math.round(sila*wzmoc);
+      this.obrona = Math.round(obrona*wzmoc);
+      this.hp = Math.round(hp*wzmoc);
+      this.hp_max = Math.round(hp*wzmoc);
     }
 
     this.poziom = _poziom;
     this.rasa = rasa;
-    this.sila =sila*(1+(this.poziom-1)/4);
-    this.obrona =obrona*(1+(this.poziom-1)/4);
-    this.hp =hp*(1+(this.poziom-1)/4);
+    var wzmoc = Math.pow(g_mn_stats, this.poziom-1)
+    this.sila = Math.round(sila*wzmoc);
+    this.obrona = Math.round(obrona*wzmoc);
+    this.hp = Math.round(hp*wzmoc);
+    this.hp_max = Math.round(hp*wzmoc);
     //wypisz co w sobie masz
     this.print = function() {
-        console.log('rasa: '+this.rasa+', poziom: '+this.poziom+', siła: '+this.sila+', obrona: '+this.obrona+', hp: '+this.hp);
-    }
+        console.log('rasa: '+this.rasa+', poziom: '+this.poziom+', siła: '+this.sila+', obrona: '+this.obrona+', hp: '+this.hp+'/'+this.hp_max);
+    },
+
+    this.print_text = ['rasa: '+this.rasa+', poziom: '+this.poziom+', siła: '+this.sila+', obrona: '+this.obrona+', hp: '+this.hp+'/'+this.hp_max]
   }
 
 ////////////////////
 // DEFINICJA POTWORA
 ////////////////////
 
-function potwor(typ, poziom) {
+function potwor(typ, _poziom) {
 
-if (!poziom>=1) {
+if (!_poziom>=1) {
   console.log('zbyt niski poziom potwora(poziom>=1)');
   global_error += '|zbyt niski poziom potwora |';
 } else {
@@ -110,32 +116,22 @@ if (!poziom>=1) {
   }
 
   //wzmocnienie
-  var wzmoc = 1+((poziom-1)/4);
-  sila *= wzmoc;
-  obrona *= wzmoc;
-  hp *= wzmoc;
-  gold *= wzmoc;
-  exp *= wzmoc;
+  var wzmoc = Math.pow(g_mn_stats, _poziom-1);
 
   this.rasa = rasa;
-  this.sila = sila;
-  this.obrona = obrona;
-  this.hp = hp;
-  this.gold = gold;
-  this.exp = exp;
+  this.sila = Math.round(sila*wzmoc);
+  this.obrona = Math.round(obrona*wzmoc);
+  this.hp = Math.round(hp*wzmoc);
+  this.hp_max = Math.round(hp*wzmoc);
+  this.gold = Math.round(gold*wzmoc);
+  this.exp = Math.round(exp*wzmoc);
   this.zywy = true;
   //wypisz co w sobie ma
   this.print = function() {
-      console.log('rasa: '+this.rasa+', siła: '+this.sila+', obrona: '+this.obrona+', hp: '+this.hp);
+      console.log('rasa: '+this.rasa+', siła: '+this.sila+', obrona: '+this.obrona+', hp: '+this.hp+'/'+this.hp_max);
   }
 } //koniec else poziom
 }
-
-  var ob = {
-    'one': 1,
-    'two': 2,
-    'three': 3
-  };
 
 
 //END
