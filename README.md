@@ -3,6 +3,10 @@
 Jest to projekt gry w ktorej walczymy i rozwijamy postac spotykając coraz to trudniejszych leśnych przeciwnikow.
 W chwili obecnej master ssie, wiec zapraszam od razu do branch "dev" gra jest w folderze text
 
-##O czym to?
+## DEMO:
 
-Jeszcze nie wiem dokładnie
+dostępne tu: [http://jwyszynski.pl/lost-in-forest/](http://jwyszynski.pl/lost-in-forest/)
+
+## O czym to?
+
+Fabuła nie jest jeszcze dostępna..
