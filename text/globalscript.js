@@ -9,38 +9,17 @@
   var potwor3 = new potwor('dzik', 3);
   var potwor4 = new potwor('dzik', 4);
 
+  var item1 = new give_item(1);
+  var item2 = new give_item(11);
+  var item3 = new give_item(21);
+  var item4 = new give_item(101);
+
 ////////////////////////
 // ODPALAMY, DODAJEMY GRACZA
 ////////////////////////
 
-var gracz = {
-  postac : new postac_gracza('wojownik'),
-  name : global_name,
+var gracz = new nowy_gracz('zabujca', 1);
 
-  levelup : function() {
-    this.postac.levelup();
-    console.log('levelup');
-  },
-
-  //NA START
-  gold : 100,
-  exp : 100,
-
-  print : function() {
-    console.log('Name: '+this.name+' Gold: '+this.gold+' Exp: '+this.exp+'\nTwoja postać: '+gracz.postac.print_text);
-  },
-
-  jaki_poziom : function() {
-    console.log('Obliczam poziom gracza');
-    //ile potrzeba exp na kolejny poziom?
-    var ile_exp = 20*gracz.postac.poziom;
-    if (gracz.exp>=ile_exp) {
-      gracz.postac.levelup();
-      console.log('Levelup! Twój level: '+gracz.postac.poziom);
-    }
-  }
-
-}
 
 ////////////////////////
 // WALKA, CZYLI WOJNA OBIEKTÓW
@@ -52,21 +31,30 @@ var walka = {
   },
 
   start : function() {
-    console.log('Startuję walkę!');
+    console.log('Startuję walkę! .. żartuję');
 
-    while (this.gracz_uderza_potwora()) {
-      console.log('walka trwa');
-    }
   },
 
   runda : function(_potwor) {
-    if (_potwor!=null) {
+    if (_potwor.zywy===true) {
     console.log('rozpoczęła się runda');
-    this.gracz_uderza_potwora(_potwor);
-    this.potwor_uderza_gracza(_potwor);
+    this.ruch_gracza(_potwor, 1);
+    this.ruch_przeciwnika(_potwor);
   } else {
-    console.log('podaj potwora - walka.runda(jaki_potwor)');
+    console.log('Potwór nie jest żywy');
   }
+  },
+
+  ruch_gracza : function(_potwor, _typ=1) {
+    if (_typ==1) {
+      this.gracz_uderza_potwora(_potwor, gracz.sila);
+    } else if (_typ==2) {
+      this.odbierz_zycie(_potwor, gracz.sila);
+    }
+  },
+
+  ruch_przeciwnika : function(_potwor, _typ=1) {
+    this.potwor_uderza_gracza(_potwor, _potwor.sila);
   },
 
   mnoznik_obrazen : function(_obrona) {
@@ -81,33 +69,28 @@ var walka = {
     return mnoznik_obrazen;
   },
 
-  gracz_uderza_potwora : function(_potwor) {
-    // Dodać jakieś inne formy ataku
-    if (_potwor.zywy===true) {
+  gracz_uderza_potwora : function(_potwor, _obrazenia=0) {
+    if (_potwor.zywy===false) return false;
     var mnoznik_obrazen = this.mnoznik_obrazen(_potwor.obrona);
 
-    var obrazenia = Math.round(gracz.postac.sila*mnoznik_obrazen);
-    _potwor.hp -= obrazenia;
-    console.log('uderzam z siłą: '+obrazenia);
+    var obrazenia = Math.round(_obrazenia*mnoznik_obrazen);
+    this.odbierz_zycie(_potwor, obrazenia);
+    console.log('Uderzam z siłą: '+obrazenia);
     this.odswiez(_potwor);
-    return true;
-  } else {
-    return false;
-  }
   },
 
-  potwor_uderza_gracza : function(_potwor) {
-    if (_potwor.zywy===true) {
-    var mnoznik_obrazen = this.mnoznik_obrazen(gracz.postac.obrona);
+  potwor_uderza_gracza : function(_potwor, _obrazenia=0) {
+    if (_potwor.zywy===false) return false;
+    var mnoznik_obrazen = this.mnoznik_obrazen(gracz.obrona);
 
-    var obrazenia = Math.round(_potwor.sila*mnoznik_obrazen);
-    gracz.postac.hp -= obrazenia;
+    var obrazenia = Math.round(_obrazenia*mnoznik_obrazen);
+    this.odbierz_zycie(gracz, obrazenia);
     console.log('Zostałeś uderzony z siłą: '+obrazenia);
     this.odswiez(_potwor);
-    return true;
-    } else {
-      return false;
-    }
+  },
+
+  odbierz_zycie : function(_komu, _ile) {
+    _komu.hp -= _ile;
   },
 
   //po każdym ruchu trzeba by odswieżyć widok i dać informacje co zostało lub że coś zostanie wykonane bo np. zmienna hp spadła do "0"
@@ -116,9 +99,9 @@ var walka = {
     if (_potwor.hp<0) {
       _potwor.hp=0;
     }
-    console.log('po tym ruchu gracz: ')+gracz.postac.print();
+    console.log('po tym ruchu gracz: ')+gracz.print();
     console.log('po tym ruchu potwor: ')+_potwor.print();
-    if (gracz.postac.hp<=0) {
+    if (gracz.hp<=0) {
       this.przegrana();
     } else if (_potwor.hp<=0) {
       this.wygrana(_potwor);
@@ -134,16 +117,25 @@ var walka = {
     console.log('Zabiłeś Potwora: '+_potwor.rasa+', Twoja nagroda -> gold: '+_potwor.gold+' exp: '+_potwor.exp);
     gracz.gold += _potwor.gold;
     gracz.exp += _potwor.exp;
-    gracz.postac.hp = gracz.postac.hp_max;
+    gracz.hp = gracz.hp_max;
     console.log('Zostałeś uleczony');
     _potwor.zywy = false;
   }
 
 }
 
+////////////////////////
+// INFO
+////////////////////////
+
+info = function() {
+  console.log('Witaj w grze Lost in Forest - It\'s Dev Time! ');
+}
 
 
 
 
+
+window.onload = info();
 
 //END

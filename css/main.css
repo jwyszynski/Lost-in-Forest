@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-image: url('../img/Forest-Fantasy.jpg');
+  color: #FFF;
+}
+h1 {
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+  font-weight: 500;
+  font-size: 40px;
+}
+a {
+  text-align: center;
+}
+.all {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: rgba(0,0,0,0.3);
+  width: 320px;
+  padding-bottom: 10px;
+  margin-top: 5px;;
+}
+a {
+  text-decoration: none;
+  color: #DDF
+}
