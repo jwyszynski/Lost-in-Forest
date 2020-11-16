@@ -1,3 +1,5 @@
+## Gra nie nadaje się jeszcze do testów
+
 # Lost in Forest
 
 Jest to projekt gry w ktorej walczymy i rozwijamy postac spotykając coraz to trudniejszych leśnych przeciwnikow.
